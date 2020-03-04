@@ -9,7 +9,7 @@ import (
 
 type Job func()
 
-func init() {
+func Xinit() {
 	w := App().Worker
 	SetUpJob(w, "refresh_masonry", masonry.Refresh)
 	SetUpJob(w, "refresh_cac", cac.Refresh)

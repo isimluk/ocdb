@@ -1,11 +1,14 @@
 package actions
 
 import (
+	"fmt"
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
 	forcessl "github.com/gobuffalo/mw-forcessl"
 	paramlogger "github.com/gobuffalo/mw-paramlogger"
+	"github.com/gorilla/mux"
 	"github.com/unrolled/secure"
+	"net/http"
 
 	"github.com/RedHatGov/ocdb/actions/api"
 	"github.com/RedHatGov/ocdb/pkg/cac"
@@ -75,12 +78,58 @@ func App() *buffalo.App {
 		apiV1.GET("/components/{component_id}/controls", api.ComponentControlsHandler)
 		apiV1.GET("/components/{component_id}/fedramp/{level}", api.ComponentFedrampHandler)
 
-		app.ServeFiles("/cac/", cac.HttpFiles())
+		//myStaticServer(app)
+		//app.ServeFiles("/cac/", cac.HttpFiles())
+		cac.RegisterStaticHandler(app)
+
+		app.ServeFiles("/ssg/build", http.Dir("/tmp/.scap_cache/build"))
 		app.ServeFiles("/", static.AssetsBox) // serve files from the public directory
 		utils.SetLogger(app.Logger)
+
 	}
 
 	return app
+}
+func myStaticServer(app *buffalo.App) {
+
+	dir := "/tmp/.scap_cache/build"
+	r := mux.NewRouter()
+	// This will serve files under http://localhost:8000/static/<filename>
+	r.PathPrefix("/guides/").Handler(http.StripPrefix("/guides/", http.FileServer(http.Dir(dir+"/guides/"))))
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir(dir)))
+	app.Mount("/CAC", r)
+	app.Mount("/ZZZ", http.FileServer(http.Dir(dir)))
+}
+
+func myStaticServer3(app *buffalo.App) {
+	dir := "/tmp/.scap_cache/build"
+	//r := mux.NewRouter()
+	// This will serve files under http://localhost:8000/static/<filename>
+	//r.PathPrefix("/xxx/").Handler(http.StripPrefix("/xxx/", http.FileServer(http.Dir(dir))))
+	//app.Mount("/YYY", http.FileServer(http.Dir(dir)))
+	app.Mount("/YYY", http.FileServer(http.Dir(dir)))
+}
+
+func myStaticServer2(app *buffalo.App) {
+
+	dir := "/tmp/.scap_cache/build"
+	r := mux.NewRouter()
+	// This will serve files under http://localhost:8000/static/<filename>
+	r.PathPrefix("/xxx/").Handler(http.StripPrefix("/xxx/", http.FileServer(http.Dir(dir))))
+	app.Mount("/YYY", r)
+}
+
+func muxer(app *buffalo.App) http.Handler {
+	f := func(res http.ResponseWriter, req *http.Request) {
+		app.Logger.Info("AHOJ XXX")
+		fmt.Fprintf(res, "XXX %s - %s", req.Method, req.URL.String())
+	}
+	mux := mux.NewRouter()
+
+	mux.HandleFunc("/foo", f)
+	mux.HandleFunc("/bar", f)
+	mux.HandleFunc("/baz/baz", f)
+	return mux
 }
 
 // translations will load locale files, set up the translator `actions.T`,
