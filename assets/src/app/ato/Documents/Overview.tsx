@@ -31,7 +31,7 @@ const ATODocuments: React.FunctionComponent<any> = (props) => {
             </PageSection>
 
             <PageSection>
-                <Gallery gutter="md">
+                <Gallery hasGutter>
                     
                     <GalleryItem>
                         <Card isHoverable>

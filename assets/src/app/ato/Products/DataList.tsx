@@ -18,8 +18,8 @@ import {
 } from '@patternfly/react-core';
 import { SearchIcon, DownloadIcon } from '@patternfly/react-icons'
 import {
-    DataToolbar, DataToolbarContent, DataToolbarFilter, DataToolbarGroup, DataToolbarItem,
-} from '@patternfly/react-core/dist/esm/experimental';
+    Toolbar, ToolbarContent, ToolbarFilter, ToolbarGroup, ToolbarItem,
+} from '@patternfly/react-core';
 
 import { Certification, CustomControl, OpenControlToCSV } from '@app/lib/opencontrol'
 import { RTMDetail } from '@app/ato/Products/RTMDetail.tsx'
@@ -28,16 +28,16 @@ import * as Api from '@app/lib/api'
 import { ServeCSV } from '@app/lib/csv'
 import * as qs from '@app/lib/querystring'
 
-interface RTMDataToolbarKebabProps {
+interface RTMToolbarKebabProps {
     view: RTMDataList;
 }
 
-interface RTMDataToolbarKebabState {
+interface RTMToolbarKebabState {
     open: boolean;
     productId?: string;
 }
 
-class RTMDataToolbarKebab extends React.PureComponent<RTMDataToolbarKebabProps, RTMDataToolbarKebabState> {
+class RTMToolbarKebab extends React.PureComponent<RTMToolbarKebabProps, RTMToolbarKebabState> {
     constructor(props) {
         super(props)
         this.state = {open: false, productId: GetActiveProductIdFromUrl()}
@@ -66,7 +66,7 @@ class RTMDataToolbarKebab extends React.PureComponent<RTMDataToolbarKebabProps, 
         ];
         return <Dropdown
                    toggle={
-                       <DropdownToggle iconComponent={null} onToggle={this.onToggle} aria-label="Downloads">
+                       <DropdownToggle onToggle={this.onToggle} aria-label="Downloads">
                            <DownloadIcon />
                        </DropdownToggle>
                    }
@@ -286,26 +286,26 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
     render() {
         const { sectionIsExpanded, statusIsExpanded, solutionIsExpanded, standardIsExpanded, filters, expanded } = this.state;
         const searchGroupItems = <React.Fragment>
-            <DataToolbarItem variant="label" id="stacked-example-resource-select">Search</DataToolbarItem>
-            <DataToolbarFilter chips={filters.search} deleteChip={this.onDelete} categoryName="Search">
+            <ToolbarItem variant="label" id="stacked-example-resource-select">Search</ToolbarItem>
+            <ToolbarFilter chips={filters.search} deleteChip={this.onDelete} categoryName="Search">
                 <InputGroup>
-                    <TextInput css="" name="textInput1" id="textInput1" type="search" aria-label="hypertext search NIST-800-53 controls" onChange={this.onSearchInputChange}/>
+                    <TextInput name="textInput1" id="textInput1" type="search" aria-label="hypertext search NIST-800-53 controls" onChange={this.onSearchInputChange}/>
                     <Button variant={ButtonVariant.tertiary} aria-label="search button for search input">
                         <SearchIcon />
                     </Button>
                 </InputGroup>
-            </DataToolbarFilter>
+            </ToolbarFilter>
         </React.Fragment>
 
         const filterGroupItems = <React.Fragment>
-            <DataToolbarFilter chips={filters.section} deleteChip={this.onDelete} categoryName="Section">
+            <ToolbarFilter chips={filters.section} deleteChip={this.onDelete} categoryName="Section">
                 <Select
                     variant={SelectVariant.checkbox}
                     aria-label="Section"
                     onToggle={this.onSectionToggle}
                     onSelect={this.onSectionSelect}
                     selections={filters.section}
-                    isExpanded={sectionIsExpanded}
+                    isOpen={sectionIsExpanded}
                     placeholderText="Section"
                 >
                     {this.sectionOptions.map((option, index) => (
@@ -314,15 +314,15 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
                         </SelectOption>
                     ))}
                 </Select>
-            </DataToolbarFilter>
-            <DataToolbarFilter chips={filters.status} deleteChip={this.onDelete} categoryName="Status">
+            </ToolbarFilter>
+            <ToolbarFilter chips={filters.status} deleteChip={this.onDelete} categoryName="Status">
                 <Select
                     variant={SelectVariant.checkbox}
                     aria-label="Status"
                     onToggle={this.onStatusToggle}
                     onSelect={this.onStatusSelect}
                     selections={filters.status}
-                    isExpanded={statusIsExpanded}
+                    isOpen={statusIsExpanded}
                     placeholderText="Status"
                 >
                     {this.statusOptions.map((option, index) => (
@@ -331,15 +331,15 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
                         </SelectOption>
                     ))}
                 </Select>
-            </DataToolbarFilter>
-            <DataToolbarFilter chips={filters.solution} deleteChip={this.onDelete} categoryName="Solution">
+            </ToolbarFilter>
+            <ToolbarFilter chips={filters.solution} deleteChip={this.onDelete} categoryName="Solution">
                 <Select
                     variant={SelectVariant.checkbox}
                     aria-label="Solution"
                     onToggle={this.onSolutionToggle}
                     onSelect={this.onSolutionSelect}
                     selections={filters.solution}
-                    isExpanded={solutionIsExpanded}
+                    isOpen={solutionIsExpanded}
                     placeholderText="Solution"
                 >
                     {this.solutionOptions.map((option, index) => (
@@ -349,16 +349,16 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
                         />
                     ))}
                 </Select>
-            </DataToolbarFilter>
-            <DataToolbarFilter chips={filters.standard} deleteChip={this.onDelete} categoryName="Standard">
+            </ToolbarFilter>
+            <ToolbarFilter chips={filters.standard} deleteChip={this.onDelete} categoryName="Standard">
                 <Select
                     variant={SelectVariant.checkbox}
-                    ariaLabelTypeAhead="Certification"
+                    typeAheadAriaLabel="Certification"
                     aria-label="Standard"
                     onToggle={this.onStandardToggle}
                     onSelect={this.onStandardSelect}
                     selections={filters.standard}
-                    isExpanded={standardIsExpanded}
+                    isOpen={standardIsExpanded}
                     placeholderText={filters.standard[0] || "Certification"}
                 >
                     {this.standardOptions.map((option, index) => (
@@ -368,11 +368,11 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
                         />
                     ))}
                 </Select>
-            </DataToolbarFilter>
+            </ToolbarFilter>
         </React.Fragment>;
 
         const buttonGroupItems = <React.Fragment>
-            <DataToolbarItem>
+            <ToolbarItem>
                 <strong>{this.props.visibleRows} </strong>
                 { this.props.rowCount == this.props.visibleRows ?
                   "" :
@@ -381,27 +381,27 @@ class RTMToolbar extends React.Component<RTMToolbarProps, RTMToolbarState> {
                   </React.Fragment>
                 }
                 Items
-            </DataToolbarItem>
-            <DataToolbarItem variant="separator"></DataToolbarItem>
-            <DataToolbarItem>
+            </ToolbarItem>
+            <ToolbarItem variant="separator"></ToolbarItem>
+            <ToolbarItem>
                 <Switch id="simple-switch" label="Collapse All" labelOff="Expand All" onChange={this.onExpandToggle} isChecked={expanded} />
-            </DataToolbarItem>
-            <DataToolbarItem>
-                <RTMDataToolbarKebab view={this.props.view} />
-            </DataToolbarItem>
+            </ToolbarItem>
+            <ToolbarItem>
+                <RTMToolbarKebab view={this.props.view} />
+            </ToolbarItem>
         </React.Fragment>;
 
         const toolbarItems = <React.Fragment>
-            <DataToolbarGroup variant="search-group">{searchGroupItems}</DataToolbarGroup>
-            <DataToolbarGroup variant="filter-group">{filterGroupItems}</DataToolbarGroup>
-            <DataToolbarGroup breakpointMods={[{modifier:"align-right"}]} variant="button-group">{buttonGroupItems}</DataToolbarGroup>
+            <ToolbarGroup >{searchGroupItems}</ToolbarGroup>
+            <ToolbarGroup variant="filter-group">{filterGroupItems}</ToolbarGroup>
+            <ToolbarGroup variant="button-group">{buttonGroupItems}</ToolbarGroup>
         </React.Fragment>;
 
-        return <DataToolbar
+        return <Toolbar
                    id="data-toolbar-with-chip-groups"
                    clearAllFilters={this.onDelete}>
-                   <DataToolbarContent>{toolbarItems}</DataToolbarContent>
-               </DataToolbar>;
+                   <ToolbarContent>{toolbarItems}</ToolbarContent>
+               </Toolbar>;
     }
 }
 

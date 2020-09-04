@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
-import { ChartVoronoiContainer } from '@patternfly/react-charts';
+import { ChartVoronoiContainer, ChartAreaProps } from '@patternfly/react-charts';
 import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme } from '@app/ato/Charts/common'
 import { Chart, ChartArea, ChartAxis, ChartStack } from '@patternfly/react-charts';
+import { VictoryAreaTTargetType } from 'victory-area';
+import { EventPropTypeInterface } from 'victory-core';
 
 export const CompletionStackCharts = React.memo((props: CompletionChartsProps) => {
     const { data } = props;
@@ -37,7 +39,7 @@ const CompletionStackChart = React.memo((props: CompletionChartProps) => {
     })
     const maxDomain = Object.values(props.cs.History[0].Stats).reduce((a, b) => { return (a as number) + (b as number) }) as number
     const baseUrl = controlsBaseUrl(props.cs.Certification)
-    const eventHandlers = [{
+    const eventHandlers: EventPropTypeInterface<VictoryAreaTTargetType, string | number>[] = [{
         target: "data",
         eventHandlers: {
             onClick: () => {

@@ -5,9 +5,9 @@ import {
   PageHeader,
   PageSidebar,
   SkipToContent,
-  Toolbar,
-  ToolbarGroup,
-  ToolbarItem,
+  PageHeaderTools,
+  PageHeaderToolsGroup,
+  PageHeaderToolsItem,
 } from '@patternfly/react-core';
 import { InteractiveNavigation } from '@app/AppLayout/Navigation'
 import { ProductSelector } from '@app/AppLayout/ProductSelector'
@@ -34,26 +34,26 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
     setIsMobileView(props.mobileView);
   };
 
-    const pageToolbar = (
-        <Toolbar>
-            <ToolbarGroup>
-                <ToolbarItem>
+    const pageHeaderTools = (
+        <PageHeaderTools>
+            <PageHeaderToolsGroup>
+                <PageHeaderToolsItem>
                     <ProductSelector/>
-                </ToolbarItem>
-            </ToolbarGroup>
-            <ToolbarGroup>
-                <ToolbarItem>
+                </PageHeaderToolsItem>
+            </PageHeaderToolsGroup>
+            <PageHeaderToolsGroup>
+                <PageHeaderToolsItem>
                     <SimpleAboutModal/>
-                </ToolbarItem>
-            </ToolbarGroup>
-        </Toolbar>
+                </PageHeaderToolsItem>
+            </PageHeaderToolsGroup>
+        </PageHeaderTools>
     );
 
     const Header = (
         <PageHeader
             logo="Red Hat's ATO PathWays"
             logoProps={logoProps}
-            toolbar={pageToolbar}
+            headerTools={pageHeaderTools}
             showNavToggle={true}
             isNavOpen={isNavOpen}
             onNavToggle={isMobileView ? onNavToggleMobile : onNavToggle}

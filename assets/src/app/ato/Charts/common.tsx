@@ -17,7 +17,9 @@ export function customTheme(statuses: any[], chartType: string) {
     const theme = getTheme(ChartThemeColor.blue, ChartThemeVariant.light)
     statuses.forEach((status, i) => {
         theme[chartType].colorScale[i] = StatusColor[status]
-        theme.legend.colorScale[i] = StatusColor[status]
+        if (theme.legend) {
+            theme.legend!.colorScale![i] = StatusColor[status]
+        }
     })
     return theme
 }

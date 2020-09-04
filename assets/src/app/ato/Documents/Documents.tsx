@@ -8,20 +8,18 @@ import { Markdown } from '@app/lib/markdown';
 import { ComponentFedRAMPTemplates } from '@app/ato/Documents/Fedramp';
 
 const Document: React.FunctionComponent<any> = (props) => {
-    var textMod = {modifier: 'flex-2' as 'flex-default', breakpoint: 'md' as 'md'};
-    var emptyMod = {modifier: 'flex-1' as 'flex-default', breakpoint: 'md' as 'md'};
     return (
         <Page>
             <PageSection variant={PageSectionVariants.light}>
                 <Flex>
-                    <Flex breakpointMods={[textMod]}>
+                    <Flex>
                         <FlexItem>
                             <Markdown>
                                 {props.children}
                             </Markdown>
                         </FlexItem>
                     </Flex>
-                    <Flex breakpointMods={[emptyMod]}>
+                    <Flex>
                         <FlexItem/>
                     </Flex>
                 </Flex>

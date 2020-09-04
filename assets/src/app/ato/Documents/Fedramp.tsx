@@ -51,7 +51,7 @@ class ComponentFedRAMPTemplates extends React.Component<any, FedRAMPsState> {
             <Page>
                 <PageSection variant={PageSectionVariants.light}>
                     <Flex>
-                        <Flex breakpointMods={[textMod]}>
+                        <Flex>
                             <FlexItem>
                                 <TextContent>
                                     <Text component="h1">FedRAMP Templates</Text>
@@ -61,11 +61,11 @@ class ComponentFedRAMPTemplates extends React.Component<any, FedRAMPsState> {
                                 </TextContent>
                             </FlexItem>
                         </Flex>
-                        <Flex breakpointMods={[emptyMod]}>
+                        <Flex>
                             <FlexItem/>
                         </Flex>
                     </Flex>
-    
+
                     <TextContent>
                         <Table
                             caption="Download Section"

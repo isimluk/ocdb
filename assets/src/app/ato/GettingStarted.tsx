@@ -14,7 +14,7 @@ const GettingStarted: React.FunctionComponent<any> = (props) => {
                       The Red Hat ATO Pathways microsite provides resources to accelerate your ATO process.
                   </Text>
                   <Text component="h2">Role-based guides</Text>
-                  <Gallery gutter="md">
+                  <Gallery hasGutter>
                       <GalleryItem>
                           <Text component="h3">Auditors</Text>
                           <Text component="p">

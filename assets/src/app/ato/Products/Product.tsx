@@ -7,7 +7,7 @@ import {
     TextContent,
     Text,
 } from '@patternfly/react-core';
-import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
+import { Spinner } from '@patternfly/react-core';
 import { EditAltIcon } from '@patternfly/react-icons'
 
 import * as Api from '@app/lib/api'

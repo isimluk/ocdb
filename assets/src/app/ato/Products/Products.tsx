@@ -7,11 +7,12 @@ import {
   TextContent,
   Text,
   Card,
-  CardBody,
-  CardHead,
+  CardTitle,
+  CardFooter,
   CardHeader,
+  CardHeaderMain,
 } from '@patternfly/react-core';
-import { Spinner } from '@patternfly/react-core/dist/esm/experimental';
+import { Spinner } from '@patternfly/react-core';
 import { NavLink } from 'react-router-dom';
 import { GetProductParamsFromUrl } from '@app/AppLayout/ProductSelector'
 import { ProductInfo } from '@app/ato/Products/Static.tsx'
@@ -26,12 +27,14 @@ const ProductGalleryItem: React.FunctionComponent<any> = (props) => {
         <GalleryItem>
             <NavLink exact={true} aria-label={productId} to={"/ato/products/" + productId + props['params']}>
                 <Card isHoverable>
-                    <CardHead>
-                        <img src={logo} alt={"logo of " + productId} />
-                    </CardHead>
-                    <CardHeader>{props['product']['name']}</CardHeader>
+                    <CardHeader>
+			<CardHeaderMain>
+                            <img src={logo} alt={"logo of " + productId} />
+                        </CardHeaderMain>
+                    </CardHeader>
+                    <CardTitle>{props['product']['name']}</CardTitle>
                     { props.product.satisfies !== undefined ?
-                        <CardBody><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardBody>
+                        <CardFooter><Text component="small">{props['product']['satisfies'].length} controls defined</Text></CardFooter>
                         : "" }
                 </Card>
             </NavLink>
@@ -52,7 +55,7 @@ class Products extends React.Component {
                 </PageSection>
 
                 <PageSection>
-                    <Gallery gutter="md">
+                    <Gallery hasGutter>
                         { (this.state['isLoading'] ? <Spinner/> : this.state['products'].map((function(object, i){
                             return (<ProductGalleryItem key={object['key']} product={object} params={params} />);
                         })))}

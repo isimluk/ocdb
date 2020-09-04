@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { TextContent, Text } from '@patternfly/react-core';
 import { Chart, ChartAxis, ChartBar, ChartStack, ChartVoronoiContainer } from '@patternfly/react-charts';
-import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme, statusSort, sectionNames } from '@app/ato/Charts/common'
-import { StatusColor } from '@app/ato/Products/DataList'
+import { CompletionChartProps, CompletionChartsProps, controlsBaseUrl, customTheme, statusSort, sectionNames } from '@app/ato/Charts/common';
+import { StatusColor } from '@app/ato/Products/DataList';
+import { VictoryBarTTargetType } from 'victory-bar';
+import { EventPropTypeInterface } from 'victory-core';
 
 export const CompletionBarCharts = React.memo((props: CompletionChartsProps) => {
     const { data } = props;
@@ -33,7 +35,7 @@ const CompletionBarChart = React.memo((props: CompletionChartProps) => {
         });
     })
     const baseUrl = controlsBaseUrl(props.cs.Certification)
-    const eventHandlers = [{
+    const eventHandlers: EventPropTypeInterface<VictoryBarTTargetType, string | number | string[] | number[]>[] = [{
         target: "data",
         eventHandlers: {
             onClick: () => {
