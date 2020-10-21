@@ -33,7 +33,7 @@ require (
 	github.com/opencontrol/compliance-masonry/models v0.0.0-00010101000000-000000000000 // indirect
 	github.com/opencontrol/fedramp-templater v0.0.0-00010101000000-000000000000
 	github.com/rogpeppe/go-internal v1.6.2 // indirect
-	github.com/rolieup/golie v0.2.0
+	github.com/rolieup/golie v0.2.1
 	github.com/sirupsen/logrus v1.6.0 // indirect
 	github.com/spf13/cobra v1.0.0 // indirect
 	github.com/stretchr/testify v1.6.1 // indirect

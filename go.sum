@@ -967,8 +967,8 @@ github.com/rogpeppe/go-internal v1.4.0/go.mod h1:xXDCJY+GAPziupqXw64V24skbSoqbTE
 github.com/rogpeppe/go-internal v1.5.2/go.mod h1:xXDCJY+GAPziupqXw64V24skbSoqbTEfhy4qGm1nDQc=
 github.com/rogpeppe/go-internal v1.6.2 h1:aIihoIOHCiLZHxyoNQ+ABL4NKhFTgKLBdMLyEAh98m0=
 github.com/rogpeppe/go-internal v1.6.2/go.mod h1:xXDCJY+GAPziupqXw64V24skbSoqbTEfhy4qGm1nDQc=
-github.com/rolieup/golie v0.2.0 h1:p4Ndjo8qQtJbxM1JlueGcHP2c+AslZXflBB1FsGZ2nk=
-github.com/rolieup/golie v0.2.0/go.mod h1:dPa3hsesMCkr55KBJTUpwUfyoeAnXITWJwMMHMY5WSA=
+github.com/rolieup/golie v0.2.1 h1:lZRWBjt2m4E7FTTnRzwWrWrvm6HBYZVZMYcnaeyMtGo=
+github.com/rolieup/golie v0.2.1/go.mod h1:dPa3hsesMCkr55KBJTUpwUfyoeAnXITWJwMMHMY5WSA=
 github.com/rs/xid v1.2.1/go.mod h1:+uKXf+4Djp6Md1KODXJxgGQPKngRmWyn10oCKFzNHOQ=
 github.com/rs/zerolog v1.13.0/go.mod h1:YbFCdg8HfsridGWAh22vktObvhZbQsZXe4/zB0OKkWU=
 github.com/rs/zerolog v1.15.0/go.mod h1:xYTKnLHcpfU2225ny5qZjxnj9NvkumZYjJHlAThCjNc=
