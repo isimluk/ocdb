@@ -1,0 +1,3 @@
+package genny
+
+var Version = ""
